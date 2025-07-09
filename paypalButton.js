@@ -7,16 +7,19 @@ class PayPalVoteButton extends HTMLElement {
   }
 
   connectedCallback() {
-    const petId = this.getAttribute('pet-id');
-    const petName = this.getAttribute('pet-name');
+  console.log("🐾 Custom Element connected");
+  const petId = this.getAttribute('pet-id');
+  const petName = this.getAttribute('pet-name');
+  console.log("🐾 Attributes received:", petId, petName);
 
-    const businessEmail = "bigdogsdontcryrescue@gmail.com";
+  const businessEmail = "bigdogsdontcryrescue@gmail.com";
 
-    const paypalScript = document.createElement("script");
-    paypalScript.src = "https://www.paypal.com/sdk/js?client-id=AWpv7_8RZvClbiJ7TAdo_TVWCal_j0Nd7Fx4LIH90zAEPjvyD-Wrm4cw11TPjYAPomdeGCsRQt-fTVAU&currency=USD"; // Replace `sb client ID` with live client ID when ready
-    paypalScript.addEventListener("load", () => this.renderPayPalButton(petId, petName, businessEmail));
-    this.shadowRoot.appendChild(paypalScript);
-  }
+  const paypalScript = document.createElement("script");
+  paypalScript.src = "https://www.paypal.com/sdk/js?client-id=AWpv7_8RZvClbiJ7TAdo_TVWCal_j0Nd7Fx4LIH90zAEPjvyD-Wrm4cw11TPjYAPomdeGCsRQt-fTVAU&currency=USD";
+  paypalScript.addEventListener("load", () => this.renderPayPalButton(petId, petName, businessEmail));
+  this.shadowRoot.appendChild(paypalScript);
+}
+
 
   renderPayPalButton(petId, petName, businessEmail) {
     const buttonContainer = document.createElement("div");
