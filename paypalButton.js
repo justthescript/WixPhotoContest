@@ -7,7 +7,8 @@ class PayPalVoteButton extends HTMLElement {
   connectedCallback() {
     const petId = this.getAttribute('pet-id') || "Unknown";
     const petName = this.getAttribute('pet-name') || "Pet";
-    const businessEmail = "bigdogsdontcryrescue@gmail.com";
+   // const businessEmail = "bigdogsdontcryrescue@gmail.com";  //commented out for Testing
+    const businessEmail = "sb-uvzqg44511273@business.example.com";
 
     const voteUrl = `https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_cart&add=1&business=${encodeURIComponent(businessEmail)}&item_name=${encodeURIComponent("Vote for " + petName)}&amount=1.00&currency_code=USD&custom=${encodeURIComponent(petId)}`;
 
