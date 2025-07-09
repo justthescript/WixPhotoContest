@@ -11,23 +11,42 @@ class PayPalVoteButton extends HTMLElement {
 
     const voteUrl = `https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_cart&add=1&business=${encodeURIComponent(businessEmail)}&item_name=${encodeURIComponent("Vote for " + petName)}&amount=1.00&currency_code=USD&custom=${encodeURIComponent(petId)}`;
 
+    // Add a style block
+    const style = document.createElement("style");
+    style.textContent = `
+      .button-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+      }
+      a {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #ffc439;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        color: #000;
+        font-weight: bold;
+      }
+    `;
+
+    const container = document.createElement("div");
+    container.className = "button-container";
+
     const button = document.createElement("a");
     button.textContent = "Vote $1";
     button.href = voteUrl;
     button.target = "_blank";
-    button.style.display = "inline-block";
-    button.style.padding = "10px 20px";
-    button.style.fontSize = "16px";
-    button.style.backgroundColor = "#ffc439";
-    button.style.border = "none";
-    button.style.borderRadius = "5px";
-    button.style.cursor = "pointer";
-    button.style.textAlign = "center";
-    button.style.textDecoration = "none";
-    button.style.color = "#000";
-    button.style.fontWeight = "bold";
 
-    this.shadowRoot.appendChild(button);
+    container.appendChild(button);
+
+    this.shadowRoot.appendChild(style);
+    this.shadowRoot.appendChild(container);
   }
 }
 
