@@ -10,7 +10,7 @@ class PayPalVoteButton extends HTMLElement {
    // const businessEmail = "bigdogsdontcryrescue@gmail.com";  //commented out for Testing
     const businessEmail = "sb-uvzqg44511273@business.example.com";
 
-    const voteUrl = `https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_cart&add=1&business=${encodeURIComponent(businessEmail)}&item_name=${encodeURIComponent("Vote for " + petName)}&amount=1.00&currency_code=USD&custom=${encodeURIComponent(petId)}`;
+    const voteUrl = `https://sandbox.paypal.com/cgi-bin/webscr?cmd=_cart&add=1&business=${encodeURIComponent(businessEmail)}&item_name=${encodeURIComponent("Vote for " + petName)}&amount=1.00&currency_code=USD&custom=${encodeURIComponent(petId)}`;
 
     // Create a container to center the button
     const container = document.createElement("div");
