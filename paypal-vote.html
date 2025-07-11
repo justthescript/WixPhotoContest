@@ -8,7 +8,7 @@
   <!-- PayPal SDK -->
   <script src="https://www.paypal.com/sdk/js?client-id=AWpv7_8RZvClbiJ7TAdo_TVWCal_j0Nd7Fx4LIH90zAEPjvyD-Wrm4cw11TPjYAPomdeGCsRQt-fTVAU&currency=USD"></script>
 
-  <!-- GitHub-hosted logic -->
+  <!-- Logic file -->
   <script src="https://cdn.jsdelivr.net/gh/justthescript/WixPhotoContest/paypalButton.js" defer></script>
 
   <style>
@@ -20,6 +20,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      background: white;
     }
     #paypal-button-container {
       width: 100%;
@@ -28,8 +29,11 @@
   </style>
 </head>
 <body>
-  <div id="paypal-button-container">
-    <p>Loading PayPal button...</p>
+  <div style="text-align:center;">
+    <h2 style="margin-bottom: 10px;">Vote for ${new URLSearchParams(location.search).get("petName") || "your pet"}</h2>
+    <div id="paypal-button-container">
+      <p>Loading PayPal button...</p>
+    </div>
   </div>
 </body>
 </html>
