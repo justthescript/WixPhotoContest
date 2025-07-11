@@ -8,9 +8,6 @@
   <!-- PayPal SDK -->
   <script src="https://www.paypal.com/sdk/js?client-id=AWpv7_8RZvClbiJ7TAdo_TVWCal_j0Nd7Fx4LIH90zAEPjvyD-Wrm4cw11TPjYAPomdeGCsRQt-fTVAU&currency=USD"></script>
 
-  <!-- PayPal Button Logic -->
-  <script src="https://cdn.jsdelivr.net/gh/justthescript/WixPhotoContest/paypalButton.js" defer></script>
-
   <style>
     html, body {
       margin: 0;
@@ -37,12 +34,22 @@
       width: 100%;
       padding: 8px;
       font-size: 16px;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
 
-    label {
-      font-size: 14px;
-      font-weight: bold;
+    #submitBtn {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #0070ba;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    #paypal-button-container {
+      display: none;
     }
   </style>
 </head>
@@ -53,15 +60,45 @@
     <label for="voteQty">How many votes? ($1 each)</label><br>
     <input type="number" id="voteQty" min="1" value="1" />
 
-    <div id="paypal-button-container">
-      <p>Loading PayPal button...</p>
-    </div>
+    <br>
+    <button id="submitBtn">Submit</button>
+
+    <div id="paypal-button-container"></div>
   </div>
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const petName = params.get("petName") || "your pet";
+    const petId = params.get("petId") || "Unknown";
+    const petName = params.get("petName") || "Pet";
     document.getElementById("heading").textContent = `Vote for ${petName}`;
+
+    document.getElementById("submitBtn").addEventListener("click", () => {
+      const qtyInput = document.getElementById("voteQty");
+      const quantity = parseInt(qtyInput.value, 10) || 1;
+
+      document.getElementById("paypal-button-container").innerHTML = ""; // clear in case of re-submit
+      document.getElementById("paypal-button-container").style.display = "block";
+
+      paypal.Buttons({
+        createOrder: (data, actions) => {
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: (quantity * 1.00).toFixed(2)
+              },
+              custom_id: petId,
+              description: `Vote for ${petName}`,
+              quantity: quantity
+            }]
+          });
+        },
+        onApprove: (data, actions) => {
+          return actions.order.capture().then((details) => {
+            window.parent.postMessage("vote-complete", "*");
+          });
+        }
+      }).render("#paypal-button-container");
+    });
   </script>
 </body>
 </html>
