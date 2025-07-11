@@ -4,11 +4,17 @@ const petName = urlParams.get("petName") || "Pet";
 
 paypal.Buttons({
   createOrder: (data, actions) => {
+    const qtyInput = document.getElementById("voteQty");
+    const quantity = qtyInput ? parseInt(qtyInput.value, 10) || 1 : 1;
+
     return actions.order.create({
       purchase_units: [{
-        amount: { value: "1.00" },
+        amount: {
+          value: (quantity * 1.00).toFixed(2)
+        },
         custom_id: petId,
-        description: `Vote for ${petName}`
+        description: `Vote for ${petName}`,
+        quantity: quantity
       }]
     });
   },
