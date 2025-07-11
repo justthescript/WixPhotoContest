@@ -8,7 +8,7 @@
   <!-- PayPal SDK -->
   <script src="https://www.paypal.com/sdk/js?client-id=AWpv7_8RZvClbiJ7TAdo_TVWCal_j0Nd7Fx4LIH90zAEPjvyD-Wrm4cw11TPjYAPomdeGCsRQt-fTVAU&currency=USD"></script>
 
-  <!-- Your hosted PayPal button script -->
+  <!-- PayPal Button Logic -->
   <script src="https://cdn.jsdelivr.net/gh/justthescript/WixPhotoContest/paypalButton.js" defer></script>
 
   <style>
@@ -17,34 +17,51 @@
       padding: 0;
       height: 100%;
       font-family: sans-serif;
+      background: white;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: white;
     }
 
     #wrapper {
       text-align: center;
       max-width: 350px;
+      padding: 20px;
     }
 
     h2 {
       margin-bottom: 10px;
     }
+
+    #voteQty {
+      width: 100%;
+      padding: 8px;
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
   <div id="wrapper">
-    <h2 id="heading">Loading...</h2>
+    <h2 id="heading">Vote for your pet</h2>
+
+    <label for="voteQty">How many votes? ($1 each)</label><br>
+    <input type="number" id="voteQty" min="1" value="1" />
+
     <div id="paypal-button-container">
       <p>Loading PayPal button...</p>
     </div>
   </div>
 
   <script>
-    // Set heading only — no re-declaration of petName
-    document.getElementById("heading").textContent =
-      "Vote for " + (new URLSearchParams(location.search).get("petName") || "your pet");
+    const params = new URLSearchParams(window.location.search);
+    const petName = params.get("petName") || "your pet";
+    document.getElementById("heading").textContent = `Vote for ${petName}`;
   </script>
 </body>
 </html>
