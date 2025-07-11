@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vote with PayPal</title>
+
+  <!-- PayPal SDK -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AWpv7_8RZvClbiJ7TAdo_TVWCal_j0Nd7Fx4LIH90zAEPjvyD-Wrm4cw11TPjYAPomdeGCsRQt-fTVAU&currency=USD"></script>
+
+  <!-- GitHub-hosted logic -->
+  <script src="https://cdn.jsdelivr.net/gh/justthescript/WixPhotoContest/paypalButton.js" defer></script>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #paypal-button-container {
+      width: 100%;
+      max-width: 350px;
+    }
+  </style>
+</head>
+<body>
+  <div id="paypal-button-container">
+    <p>Loading PayPal button...</p>
+  </div>
+</body>
+</html>
