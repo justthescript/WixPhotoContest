@@ -4,10 +4,8 @@
   <meta charset="UTF-8">
   <title>Voting...</title>
 
-  
-  <script src="https://www.paypal.com/sdk/js?client-id=AWpv7_8RZvClbiJ7TAdo_TVWCal_j0Nd7Fx4LIH90zAEPjvyD-Wrm4cw11TPjYAPomdeGCsRQt-fTVAU&currency=USD"></script> 
-  
-  
+  <script src="https://www.paypal.com/sdk/js?client-id=AWpv7_8RZvClbiJ7TAdo_TVWCal_j0Nd7Fx4LIH90zAEPjvyD-Wrm4cw11TPjYAPomdeGCsRQt-fTVAU&currency=USD"></script>
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -78,9 +76,6 @@
               document.getElementById("paypal-button-container").style.display = "none";
               document.getElementById("successMessage").style.display = "block";
               startCountdown();
-
-              // Notify Wix lightbox to close
-              window.parent.postMessage({ closeLightbox: true }, "*");
             });
           }
         }).render("#paypal-button-container");
@@ -95,6 +90,7 @@
         countdown.textContent = `You can now close this window. Closing in ${seconds} seconds...`;
         if (seconds <= 0) {
           clearInterval(interval);
+          window.parent.postMessage({ closeLightbox: true }, "*");
           window.close();
         }
       }, 1000);
