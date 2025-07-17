@@ -25,9 +25,11 @@
 <body>
   <h2 id="voteHeader">Vote for Pet</h2>
 
+  <div id="voteForm">
   <label for="qty">Enter number of votes:</label>
   <input type="number" id="qty" min="1" value="1" />
   <button id="submitBtn">Submit</button>
+  </div>
 
   <div id="paypal-button-container" style="margin-top: 20px;"></div>
 
@@ -56,8 +58,8 @@
 
       document.getElementById("submitBtn").addEventListener("click", () => {
         const qty = Math.max(1, parseInt(document.getElementById("qty").value));
-        document.getElementById("submitBtn").style.display = "none";
-        document.getElementById("qty").style.display = "none";
+        document.getElementById("voteForm").style.display = "none";
+
 
         paypal.Buttons({
           createOrder: function(data, actions) {
